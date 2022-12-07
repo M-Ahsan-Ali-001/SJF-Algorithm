@@ -8,9 +8,9 @@
  
  # Explanation
  - Dynamically Allocated 2D array is used to take input (BT & AT)
- -Separate 1D Dynamically Allocated  arrays are used for pos CT , TAT , WT and POS
+ - Separate 1D Dynamically Allocated  arrays are used for pos CT , TAT , WT and POS
  
- -For sorting Buble Sort is used
+ - For sorting Buble Sort is used
  - CALULCATED CT using formula :
      CT[0] = TW_D[1][0]
      CT[1] = TW_D[1][0] + CT[0]
