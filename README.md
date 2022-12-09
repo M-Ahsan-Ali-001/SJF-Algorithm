@@ -12,7 +12,7 @@
  
  - For sorting Buble Sort is used
  - CALULCATED CT using formula :
-    -  CT[0] = TW_D[1][0]
+    -  CT[0] = TW_D[1][0] + TW_D[0][0]
     -  CT[1] = TW_D[1][0] + CT[0]
      - CT[i] = TW_D[1][i] + CT[i-1]
    
