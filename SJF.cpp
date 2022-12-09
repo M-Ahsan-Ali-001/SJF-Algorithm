@@ -35,15 +35,7 @@ for(int y=0;y<2;y++)
     }
    
 }
-//..printing
-/*for(int y=0;y<2;y++)
-{
-    for(int x=0;x<n;x++)
-    {
-        cout<<ar[y][x]<<endl;
-    }
-   
-}*/
+
 
 //Sorting
 
@@ -73,20 +65,11 @@ for(int y=0;y<n-1;y++)
    
 }
 
-//..printing
-/*cout<<"\nAftersorting>>>>\n";
-for(int y=0;y<2;y++)
-{
-    for(int x=0;x<n;x++)
-    {
-        cout<<ar[y][x]<<endl;
-    }
-   
-}*/
+
 
 
 //Completion Time
-CT[0] = ar[1][0]+1;
+CT[0] = ar[1][0]+ar[0][0];
 for(int r=1 ; r<n ;r++)
 {
      CT[1] = ar[1][1] + CT[0];
