@@ -12,7 +12,7 @@
  
  - For sorting Buble Sort is used
  - CALULCATED CT using formula :
-   (
+   ( <br>
       ( AT[i]>AT[j] && 
       (AT[j]<(AT[i]+BT[i])&&(BT[j]<BT[i]) ) 
       )
