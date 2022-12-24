@@ -1,122 +1,172 @@
 #include <iostream>
-#include<iomanip>
 using namespace std;
 
-int main() {
-int ** ar,n,*pos , *CT , *WT ,*TAT;
-
-
-
-ar = new int *[2];
-
-cout<<"Enter total no of process:";
-cin>>n;
-pos = new int[n];
-CT = new int[n];
-TAT = new int[n];
-WT = new int[n];
-int i =0,k=0;
-
-while(i<n){
-   
-    ar[i]= new int [n];
-    pos[i]=i;
-    i++;
-}
-
-// taking inputs
-for(int y=0;y<2;y++)
+int main()
 {
-    for(int x=0;x<n;x++)
+    int * AT, *BT,*CT,*TAT,*WT,*POS,n,HOLD ;
+   
+    cout<<"Enter total number of process";
+    cin>>n;
+   
+    AT= new int [n];
+    BT= new int [n];
+    POS= new int [n];
+    CT= new int [n];
+    TAT= new int [n];
+    WT= new int [n];
+   
+    for(int i=0;i<n;i++)
     {
-        if(y==0){cout<<"Enter AT- "<<x+1<<":";}
-        else{cout<<"Enter BT- "<<x+1<<":";}
-        cin>>ar[y][x];
+        cout<<"ENTER AT"<<i+1<<":";
+        cin>>AT[i];
+        POS[i]=i;
     }
-   
-}
-
-
-//Sorting
-
-for(int y=0;y<n-1;y++)
-{
-    for(int x=0;x<n-y-1;x++)
+    
+     for(int i=0;i<n;i++)
     {
-
-     if(ar[1][x]>ar[1][x+1])
-     {
-         int hld = ar[1][x];
-         ar[1][x] = ar[1][x+1];
-         ar[1][x+1] = hld;
-         
-           int hld2 = ar[0][x];
-         ar[0][x] = ar[0][x+1];
-         ar[0][x+1] = hld2;
+           cout<<"ENTER BT"<<i+1<<":";
+        cin>>BT[i];
        
        
-        int posh = pos[x];
-        pos[x] = pos[x+1];
-        pos[x+1] = posh;
-         
-     }
-
     }
    
-}
-
-
-
-
-//Completion Time
-CT[0] = ar[1][0]+ar[0][0];
-for(int r=1 ; r<n ;r++)
-{
-     CT[1] = ar[1][1] + CT[0];
-    CT[r] = ar[1][r] + CT[r-1];
+    //sort
    
+    for(int i=0;i<n-1;i++)
+    {
+        for(int j=i+1;j<n;j++){
+           
+            if(BT[i]>BT[j])  {
+                 int tempBT = BT[j];
+                 BT[j]=BT[i];
+                 BT[i]=tempBT;
+                 
+                 
+                 int tempAT = AT[j];
+                 AT[j]=AT[i];
+                 AT[i]=tempAT;
+                 
+                 int tempPOS = POS[j];
+                 POS[j]=POS[i];
+                 POS[i]=tempPOS; }
+        }
+       
+    }
    
+     /* cout<<"\ntestprint\n";
+        for(int i=0;i<n;i++)
+    {
+        cout<<AT[i]<<"\t"<<BT[i]<<endl;
+    }*/
    
-}
-
+      int low=AT[0],idx=0;
+        for(int i=1;i<n;i++)
+       {
+     
+         // cout<<"\n"<<low<<" "<<AT[i]<<endl;
+           if(low>AT[i] || (low==AT[i]  && BT[i-1]>BT[i])){
+               low=AT[i];
+               idx=i;
+               cout<<"\nFound\n";
+             //  cout<<"\nnow low is :"<<low<<endl;
+            }
+                 
+                 
+          if(i+1 == n){
+                //cout<<"\nhere\n";
+               
+                int tempBT = BT[0];
+                 BT[0]=BT[idx];
+                 BT[idx]=tempBT;
+                 
+                 
+                 int tempAT = AT[0];
+                 AT[0]=AT[idx];
+                 AT[idx]=tempAT;
+                 
+                 int tempPOS = POS[0];
+                 POS[0]=POS[idx];
+                 POS[idx]=tempPOS; }
+    }
+   
+      /* cout<<"\n2testprint\n";
+        for(int i=0;i<n;i++)
+    {
+        cout<<AT[i]<<"\t"<<BT[i]<<endl;
+    }*/
+   
+      for(int i=1;i<n;i++)
+    {
+        for(int j=i+1;j<n-1;j++){
+           
+            if((AT[i]>AT[j] && (AT[j]<(AT[i]+BT[i]) &&
+                (BT[j]<BT[i]))
+               )
+                 ||
+               ((AT[i]<AT[j])
+                 &&
+                 ((BT[j]<BT[i]) &&
+                  (AT[j]<(AT[i]+BT[i]))
+                 )
+               )
+            )
+             {
+                 
+              //  cout<<"ATi:"<<AT[i]<<" BTi :"<<BT[i]<<"ATj:"<<AT[j]<<" BTj :"<<BT[j]<<endl;  
+                 int tempBT = BT[j];
+                 BT[j]=BT[i];
+                 BT[i]=tempBT;
+                 
+                 
+                 int tempAT = AT[j];
+                 AT[j]=AT[i];
+                 AT[i]=tempAT;
+                 
+                 int tempPOS = POS[j];
+                 POS[j]=POS[i];
+                 POS[i]=tempPOS;
+                 
+             }// if statement closing
+           
+        }//inner loop closing
+       
+    }
+    
+    
+    //Complettion Time(CT) calculation
+    CT[0] =BT[0]+AT[0];
+    for(int i=1 ;i<n;i++)
+    {
+    
+    CT[i] =BT[i]+CT[i-1];
+    CT[1] =BT[1]+CT[0];    
+    }
 //TAT
+  for(int i=0 ;i<n;i++)
+  {
+      TAT[i]=CT[i]-AT[i];
+      WT[i]=TAT[i]-BT[i];
+      
+      
+  }
+cout<<"Pno\tAT\tBT\tCT\tTAT\tWT\n"<<endl;
 
-for (int x=0;x< n;x++){
-   
-TAT[x] = CT[x]-ar[0][x];
-}
-
-
-//WT
-
-for (int x=0;x< n;x++){
-   
-WT[x] = TAT[x]-ar[1][x];
-}
-
-
-cout<<"\n\n\n"<<"Pno"<<setw(4)<< "AT"<<setw(5)<<"BT"<<setw(5)<<"CT"<<setw(5)<<"TAT"<<setw(5)<<"WT"<<endl;
-int p;
-for (int x=0;x< n;x++){
-   
-    for(int y=0 ;y<n;y++)
+for(int i=0;i<n;i++){
+  
+     for(int y=0 ;y<n;y++)
     {
-        if(x == pos[y])
+        if(i == POS[y])
         {
-            p=y;
+            HOLD=y;
         }
        
        
     }
-     cout<<"P"<<x+1<<setw(5)<<ar[0][p]<<setw(5)<<ar[1][p]<<setw(5)<<CT[p]<<setw(5)<<TAT[p]<<setw(5)<<WT[p]<<endl;
-     
-      //cout<<"\npos parent:"<<p<<endl;
-    }
+    
+
+cout<<"P"<<i+1<<"\t"<<AT[HOLD]<<"\t"<<BT[HOLD]<<"\t"<<CT[HOLD]<<"\t"<<TAT[HOLD]<<"\t"<<WT[HOLD]<<endl ;   
+  
+}
 
    
-   
-
-
-
-    return 0;
 }
