@@ -12,20 +12,20 @@
  
  - For sorting Buble Sort is used
  - CALULCATED CT using formula :
-    (
-      ( AT[i]>AT[j] && 
-      (AT[j]<(AT[i]+BT[i])&&(BT[j]<BT[i]) ) 
-      )
-                 ||
-         (
-                 (AT[i]<AT[j])
-                  &&
-             (
-                  (BT[j]<BT[i]) &&
-                  ( AT[j]<(AT[i]+BT[i]) )
-              )
-          )
-     )
+  - (
+   -   ( AT[i]>AT[j] && 
+   -   (AT[j]<(AT[i]+BT[i])&&(BT[j]<BT[i]) ) 
+    -  )
+       -          ||
+      -   (
+        -         (AT[i]<AT[j])
+         -         &&
+         -    (
+          -        (BT[j]<BT[i]) &&
+           -       ( AT[j]<(AT[i]+BT[i]) )
+            -  )
+         - )
+    - )
    
  - CALULCATED TAT using formula :
        TAT [i] = CT[i] - TW_D[0][i]
